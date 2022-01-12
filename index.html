@@ -44,7 +44,8 @@
       /* gradient */
       .container::after {
         grid-area: 1 / 1;
-        content: linear-gradient(
+        content: "\A";
+        background: linear-gradient(
           0,
           var(--background) calc(100% - var(--banner-width) - 100px),
           rgb(var(--background-rgb) / 0.1)
@@ -163,7 +164,14 @@
           <div class="banner" style="background: purple"></div>
         </div>
         <!-- offset to make it look more nature -->
-        <div class="row" style="--dur: 112.3s; --count: 4; --offset: calc(var(--banner-width) * 0.5)">
+        <div
+          class="row"
+          style="
+            --dur: 112.3s;
+            --count: 4;
+            --offset: calc(var(--banner-width) * 0.5);
+          "
+        >
           <div class="banner" style="background: red"></div>
           <div class="banner" style="background: green"></div>
           <div class="banner"></div>
@@ -185,7 +193,14 @@
           <div class="banner"></div>
           <div class="banner" style="background: purple"></div>
         </div>
-        <div class="row" style="--dur: 112.2s; --count: 4;--offset: calc(var(--banner-width) * 0.5)">
+        <div
+          class="row"
+          style="
+            --dur: 112.2s;
+            --count: 4;
+            --offset: calc(var(--banner-width) * 0.5);
+          "
+        >
           <div class="banner" style="background: slateblue"></div>
           <div class="banner" style="background: green"></div>
           <div class="banner"></div>
