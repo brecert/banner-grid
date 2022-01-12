@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>banner-grid</title>
+    <style>
+      :root {
+        --background: #22272e;
+        --background-rgb: 34 39 46;
+        --secondary-background: #2d333b;
+      }
+
+      @media (prefers-color-scheme: light) {
+        :root {
+          --background: #ffffff;
+          --background-rgb: 255 255 255;
+          --secondary-background: #f6f8fa;
+        }
+      }
+
+      body {
+        overflow: hidden;
+        margin: 0;
+        background: var(--background);
+      }
+
+      .container {
+        --container-width: 100vw;
+        --banner-width: clamp(200px, calc(var(--container-width) / 4), 450px);
+        --gap: calc(var(--banner-width) / 15);
+
+        --border-color: #fd6671;
+
+        height: 720px;
+
+        display: grid;
+
+        max-width: var(--max-width);
+        overflow: hidden;
+        background: var(--secondary-background);
+      }
+
+      /* gradient */
+      .container::after {
+        grid-area: 1 / 1;
+        content: linear-gradient(
+          0,
+          var(--background) calc(100% - var(--banner-width) - 100px),
+          rgb(var(--background-rgb) / 0.1)
+        );
+        z-index: 1;
+      }
+
+      .grid {
+        grid-area: 1 / 1;
+        --offset-y: -1;
+
+        display: flex;
+        flex-direction: column;
+        gap: var(--gap);
+        transform: translate(
+            calc(var(--banner-width) * var(--offset-y)),
+            calc(var(--banner-width) * var(--offset-y))
+          )
+          rotateX(54.5deg) rotateZ(-45deg) scale(1.75);
+      }
+
+      /* todo: reduce this math */
+      @keyframes scroll {
+        from {
+          transform: translateX(
+            calc(
+              var(--offset, 0px) +
+                (var(--banner-width) * 2.5 + (var(--banner-width) * -1))
+            )
+          );
+        }
+
+        to {
+          transform: translateX(
+            calc(
+              var(--offset, 0px) +
+                (
+                  var(--banner-width) * 2.5 +
+                    (
+                      (var(--banner-width) * (var(--count) + 1) * -1) -
+                        var(--gap) * (var(--count))
+                    )
+                )
+            )
+          );
+        }
+      }
+
+      .grid .row {
+        display: flex;
+        gap: inherit;
+        animation: var(--dur, 2s) linear infinite normal scroll;
+      }
+
+      .grid .row:nth-of-type(2n) {
+        animation-direction: reverse;
+      }
+
+      .banner {
+        aspect-ratio: 29 / 12;
+        width: var(--banner-width);
+
+        border-radius: calc(var(--banner-width) / 25);
+        box-shadow: -2px 2px 0px 0px var(--border-color);
+
+        background-color: #22272e;
+        background-image: url(https://autumn.revolt.chat/banners/yMurJiXf45VJpbal0X2zQkm4vaXsXGaRtoPUIcvPcH?width=640);
+        background-position: center;
+        background-size: cover;
+        background-repeat: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="grid">
+        <div class="row" style="--dur: 122s; --count: 3">
+          <div class="banner" style="background: red"></div>
+          <div class="banner" style="background: green"></div>
+          <div class="banner"></div>
+
+          <div class="banner" style="background: red"></div>
+          <div class="banner" style="background: green"></div>
+          <div class="banner"></div>
+        </div>
+        <div class="row" style="--dur: 156s; --count: 4">
+          <div class="banner" style="background: red"></div>
+          <div class="banner" style="background: green"></div>
+          <div class="banner"></div>
+          <div class="banner" style="background: purple"></div>
+
+          <div class="banner" style="background: red"></div>
+          <div class="banner" style="background: green"></div>
+          <div class="banner"></div>
+          <div class="banner" style="background: purple"></div>
+        </div>
+        <div class="row" style="--dur: 146s; --count: 4">
+          <div
+            class="banner"
+            style="
+              background-image: url(https://autumn.revolt.chat/banners/VhS7v1DmyB8eI_F-66pNanSocI0awD62cojiOkVs_E?width=640);
+            "
+          ></div>
+          <div class="banner" style="background: green"></div>
+          <div class="banner"></div>
+          <div class="banner" style="background: purple"></div>
+
+          <div
+            class="banner"
+            style="
+              background-image: url(https://autumn.revolt.chat/banners/VhS7v1DmyB8eI_F-66pNanSocI0awD62cojiOkVs_E?width=640);
+            "
+          ></div>
+          <div class="banner" style="background: green"></div>
+          <div class="banner"></div>
+          <div class="banner" style="background: purple"></div>
+        </div>
+        <!-- offset to make it look more nature -->
+        <div class="row" style="--dur: 112.3s; --count: 4; --offset: calc(var(--banner-width) * 0.5)">
+          <div class="banner" style="background: red"></div>
+          <div class="banner" style="background: green"></div>
+          <div class="banner"></div>
+          <div class="banner" style="background: purple"></div>
+
+          <div class="banner" style="background: red"></div>
+          <div class="banner" style="background: green"></div>
+          <div class="banner"></div>
+          <div class="banner" style="background: purple"></div>
+        </div>
+        <div class="row" style="--dur: 112.2s; --count: 4">
+          <div class="banner" style="background: slateblue"></div>
+          <div class="banner" style="background: green"></div>
+          <div class="banner"></div>
+          <div class="banner" style="background: purple"></div>
+
+          <div class="banner" style="background: slateblue"></div>
+          <div class="banner" style="background: green"></div>
+          <div class="banner"></div>
+          <div class="banner" style="background: purple"></div>
+        </div>
+        <div class="row" style="--dur: 112.2s; --count: 4;--offset: calc(var(--banner-width) * 0.5)">
+          <div class="banner" style="background: slateblue"></div>
+          <div class="banner" style="background: green"></div>
+          <div class="banner"></div>
+          <div class="banner" style="background: purple"></div>
+
+          <div class="banner" style="background: slateblue"></div>
+          <div class="banner" style="background: green"></div>
+          <div class="banner"></div>
+          <div class="banner" style="background: purple"></div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
